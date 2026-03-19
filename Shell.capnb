@@ -1,0 +1,74 @@
+[
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "## What is CAP\n#### The Cloud Application Programming Model (CAP) is a **framework of languages, libraries, and tools** for building enterprise-grade cloud applications. \n\nIt guides developers along a golden path of proven best practices, which are served out of the box by generic providers cloud-natively, thereby relieving application developers from tedious recurring tasks.\n\n![fast inner loops](image-1.png)\n\n*** ",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Initial setup\nCreate empty project structure\n",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "cds init",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Set up Domain Model\ndb/schema.cds\n```cds\nusing { managed } from '@sap/cds/common';\nnamespace sap.capire.bookshop;\n\nentity Books : managed {\n  key ID : Integer;\n  title  : localized String;\n  descr  : localized String;\n  author : Association to Authors;\n  stock  : Integer;\n  price  : Decimal;\n}\n\nentity Authors : managed {\n  key ID : Integer;\n  name   : String;\n  books  : Association to many Books on books.author = $self;\n}\n",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "npm install\ncds watch",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### ...add some test data",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "cds add data",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Services\nNow create services to consume the data\n\n![alt text](image.png)\n\nsrv/admin-service.cds\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\nservice AdminService @(odata:'/admin') {\n  entity Authors as projection on my.Authors;\n  entity Books as projection on my.Books;\n}",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "srv/cat-service.cds\n\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\nservice CatalogService @(odata:'/browse') {\n  @readonly entity Books as projection on my.Books {\n    *, // all fields with the following denormalizations:\n    author.name as author,\n  } excluding { createdBy, modifiedBy };\n}",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Test the service via HTTP requests",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "cds add http",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Helpful resources\n- __[capire](https://cap.cloud.sap/)__\n- __[Docs and Samples](https://github.com/capire)__\n- __[Introduction to CAP Course](https://learning.sap.com/courses/introduction-to-sap-cloud-application-programming-model)__\n- __[SAP Fiori Development Portal](https://ui5.sap.com/test-resources/sap/fe/core/fpmExplorer/index.html#/topic/introduction)__\n- __[Fiori Elements Feature Showcase](https://github.com/SAP-samples/fiori-elements-feature-showcase)__\n",
+        "outputs": []
+    }
+]
