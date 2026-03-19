@@ -14,7 +14,7 @@
     {
         "kind": 2,
         "language": "shell",
-        "value": "cds add data\ncds add hana\ncds add xsuaa\ncds add ias\ncds add multitenancy\ncds add mta\ncds add kyma\ncds add github-actions\n...",
+        "value": "cds init\n\ncds add data\ncds add hana\ncds add xsuaa\ncds add ias\ncds add multitenancy\ncds add mta\ncds add kyma\ncds add github-actions\n...",
         "outputs": []
     },
     {
