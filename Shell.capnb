@@ -68,19 +68,13 @@
     {
         "kind": 1,
         "language": "markdown",
-        "value": "### Services\nNow create services to consume the data\n\n![alt text](image.png)\n\nsrv/admin-service.cds\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\nservice AdminService @(odata:'/admin') {\n  entity Authors as projection on my.Authors;\n  entity Books as projection on my.Books;\n}",
-        "outputs": []
-    },
-    {
-        "kind": 1,
-        "language": "markdown",
-        "value": "srv/cat-service.cds\n\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\nservice CatalogService @(odata:'/browse') {\n  @readonly entity Books as projection on my.Books {\n    *, // all fields with the following denormalizations:\n    author.name as author,\n  } excluding { createdBy, modifiedBy };\n}",
+        "value": "### Services\nNow create services to consume the data\n\n![alt text](image.png)\n\nsrv/services.cds\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\n\nservice AdminService @(odata:'/admin') {\n  entity Authors as projection on my.Authors;\n  entity Books as projection on my.Books;\n}\n\nservice CatalogService @(odata:'/browse') {\n  @readonly entity Books as projection on my.Books {\n    *, // all fields with the following denormalizations:\n    author.name as author,\n  } excluding { createdBy, modifiedBy };\n}",
         "outputs": []
     },
     {
         "kind": 2,
         "language": "shell",
-        "value": "touch srv/admin-service.cds\ntouch srv/cat-service.cds",
+        "value": "touch srv/services.cds",
         "outputs": []
     },
     {
