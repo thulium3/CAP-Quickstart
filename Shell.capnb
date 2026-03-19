@@ -2,7 +2,25 @@
     {
         "kind": 1,
         "language": "markdown",
-        "value": "## What is CAP\n#### The Cloud Application Programming Model (CAP) is a **framework of languages, libraries, and tools** for building enterprise-grade cloud applications. \n\nIt guides developers along a golden path of proven best practices, which are served out of the box by generic providers cloud-natively, thereby relieving application developers from tedious recurring tasks.\n\n![fast inner loops](image-1.png)\n\n*** ",
+        "value": "## What is CAP\n#### The Cloud Application Programming Model (CAP) is a **framework of languages, libraries, and tools** for building enterprise-grade cloud applications. \n\nIt guides developers along a golden path of proven best practices, which are served out of the box by generic providers cloud-natively, thereby relieving application developers from tedious recurring tasks.\n\n### Fast Inner Loops\n![fast inner loops](image-1.png)\n\n*** ",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "### Grow as you Go...\nUse cds add to grow your project as you go:",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "cds add data\ncds add hana\ncds add xsuaa\ncds add ias\ncds add multitenancy\ncds add mta\ncds add kyma\ncds add github-actions\n...",
+        "outputs": []
+    },
+    {
+        "kind": 1,
+        "language": "markdown",
+        "value": "## Hands on",
         "outputs": []
     },
     {
@@ -20,7 +38,7 @@
     {
         "kind": 1,
         "language": "markdown",
-        "value": "### Set up Domain Model\ndb/schema.cds\n```cds\nusing { managed } from '@sap/cds/common';\nnamespace sap.capire.bookshop;\n\nentity Books : managed {\n  key ID : Integer;\n  title  : localized String;\n  descr  : localized String;\n  author : Association to Authors;\n  stock  : Integer;\n  price  : Decimal;\n}\n\nentity Authors : managed {\n  key ID : Integer;\n  name   : String;\n  books  : Association to many Books on books.author = $self;\n}\n",
+        "value": "### Set up Domain Model\ndb/schema.cds\n\n```cds\nusing { managed } from '@sap/cds/common';\nnamespace sap.capire.bookshop;\n\nentity Books : managed {\n  key ID : Integer;\n  title  : localized String;\n  descr  : localized String;\n  author : Association to Authors;\n  stock  : Integer;\n  price  : Decimal;\n}\n\nentity Authors : managed {\n  key ID : Integer;\n  name   : String;\n  books  : Association to many Books on books.author = $self;\n}",
         "outputs": []
     },
     {
