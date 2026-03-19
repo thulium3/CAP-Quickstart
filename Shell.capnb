@@ -8,7 +8,7 @@
     {
         "kind": 1,
         "language": "markdown",
-        "value": "### Grow as you Go...\nUse cds add to grow your project as you go:",
+        "value": "### Jumpstart & Grow as You Go...\nUse `cds init` to start and `cds add` to grow your project as you go:",
         "outputs": []
     },
     {
@@ -44,6 +44,12 @@
     {
         "kind": 2,
         "language": "shell",
+        "value": "touch db/schema.cds",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
         "value": "npm install\ncds watch",
         "outputs": []
     },
@@ -69,6 +75,12 @@
         "kind": 1,
         "language": "markdown",
         "value": "srv/cat-service.cds\n\n```cds\nusing { sap.capire.bookshop as my } from '../db/schema';\nservice CatalogService @(odata:'/browse') {\n  @readonly entity Books as projection on my.Books {\n    *, // all fields with the following denormalizations:\n    author.name as author,\n  } excluding { createdBy, modifiedBy };\n}",
+        "outputs": []
+    },
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "touch srv/admin-service.cds\ntouch srv/cat-service.cds",
         "outputs": []
     },
     {
